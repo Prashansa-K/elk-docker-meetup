@@ -19,8 +19,6 @@ services:
       cluster.initial_master_nodes: "elasticsearch"
       discovery.zen.ping.unicast.hosts: "elasticsearch"
       discovery.zen.minimum_master_nodes: 1
-#    networks:
-#      - dell_net
     deploy:
       mode: replicated
       replicas: 1
@@ -41,8 +39,6 @@ services:
         target: /usr/share/logstash/pipeline/logstash.conf    
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-#    networks:
-#      - dell_net
     depends_on:
       - elasticsearch
     deploy:
@@ -59,8 +55,6 @@ services:
     configs:
       - source: kibana_config
         target: /usr/share/kibana/config/kibana.yml
-#    networks:
-#      - dell_net
     depends_on:
       - elasticsearch
     deploy:
@@ -69,11 +63,6 @@ services:
       placement:
          constraints: 
           - node.role == manager
-
-#networks:
-#  dell_net:
-#    external: true
-
 
 configs:
 
